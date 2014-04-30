@@ -2,15 +2,15 @@ function OoyalaPlayerBlock(runtime, element) {
     OO.ready(function() {
         var content_id = $('.ooyalaplayer', element).data('content-id');
         var player_id = $('.ooyalaplayer', element).data('player-id');
-        var transcript_id = $('.ooyalaplayer', element).data('transcript-id');
         var dom_id = $('.ooyalaplayer', element).data('dom-id');
+        var transcript_file_id = $('.ooyalaplayer', element).data('transcript-file-id');
         var player_token = $('.ooyalaplayer', element).data('player-token');
         var transcript_enabled = $('.ooyalaplayer', element).data('transcript-enabled');
         var overlays = $('.ooyala-overlays .ooyala-overlay', element);
 
         // move the transcript widget into the right place in the DOM
         // after it is injected by the 3Play JS code
-        $('#transcript_'+transcript_id).appendTo('.transcript-container-'+dom_id);
+        $('#transcript_'+transcript_file_id).appendTo('.transcript-container-'+dom_id);
 
         var player_options = {
             /*onCreate: window.onCreate,*/
@@ -51,7 +51,7 @@ function OoyalaPlayerBlock(runtime, element) {
             // Studio, we load things differently, so we need something to initialize the plugin.
             // setup a simple interval to check if we can start the initialization.
             var interval_id = setInterval(function() {
-                if (!_.isUndefined(run_p3)) {
+                if (!_.isUndefined(window["run_p3"])) {
                     p3_window_loaded = true;
                     run_p3();
                     clearInterval(interval_id);
